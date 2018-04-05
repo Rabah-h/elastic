@@ -63,16 +63,16 @@ spec:
           value: "{{ template "master.fullname" . }}"
         - name: KUBERNETES_NAMESPACE
           value: "{{ .Release.Namespace }}"
-        - name: NODE_MASTER
-          value: "true"
-        - name: NODE_DATA
-          value: "false"
         - name: ELASTICSEARCH_CLUSTER_NAME
           value: "{{ .Values.name }}"
         - name: ELASTICSEARCH_PLUGINS
           value: "{{ .Values.plugins }}"
-        - name: ES_JAVA_OPTS
-          value: "-Xms{{ .Values.master.heapSize }} -Xmx{{ .Values.master.heapSize }}"
+        - name: ELASTICSEARCH_HEAP_SIZE
+          value: "{{ .Values.ingest.heapSize }}"
+        - name: ELASTICSEARCH_IS_DEDICATED_NODE
+          value: "yes"
+        - name: ELASTICSEARCH_NODE_TYPE
+          value: "master"
         ports:
         - name: transport
           containerPort: 9300
@@ -93,7 +93,7 @@ spec:
           name: "config"
           subPath: elasticsearch_custom.yml
         - name: "data"
-          mountPath: "/bitnami"
+          mountPath: "/bitnami/elasticsearch/data"
       volumes:
       - name: "config"
         configMap:

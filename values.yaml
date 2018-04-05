@@ -5,6 +5,7 @@ name: elastic
 
 ## Elasticsearch image
 ## ref: https://hub.docker.com/r/bitnami/elasticsearch/tags/
+<<<<<<< HEAD
 image:
   registry: docker.io
   repository: bitnami/elasticsearch
@@ -20,6 +21,14 @@ image:
   ##
   # pullSecrets:
   #   - myRegistrKeySecretName 
+=======
+image: juanariza131/elasticsearch:5.5.2-r8
+ 
+## Specify a imagePullPolicy
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+pullPolicy: IfNotPresent
+>>>>>>> Create production-ready ES chart
 
 ## The serviceAccountName to be used, required by the elasticsearch-cloud-kubernetes plugin
 serviceAccountName: default
@@ -44,8 +53,8 @@ master:
       cpu: 25m
       memory: "256Mi"
 
-client:
-  name: client
+coordinating:
+  name: coordinating-only
   replicas: 2
   heapSize: 128m
   antiAffinity: "soft"
@@ -63,7 +72,7 @@ client:
 
 data:
   name: data
-  replicas: 3
+  replicas: 2
   heapSize: 1024m
   antiAffinity: "soft"
   ## Configure resource requests and limits
@@ -101,6 +110,19 @@ data:
     ## Persistent Volume size
     ##
     size: 8Gi
+
+ingest:
+  name: ingest
+  replicas: 2
+  heapSize: 128m
+  antiAffinity: "soft"
+  ## Configure resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ##
+  resources:
+    requests:
+      cpu: 25m
+      memory: "256Mi"
 
 metrics:
   enabled: false
