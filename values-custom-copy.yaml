@@ -1,0 +1,11 @@
+elasticsearch:
+  sysctlImage:
+    enabled: false
+
+
+image:
+  registry: docker.io
+  repository: bitnami/elasticsearch
+  tag: 7.17.24-debian-12-r0
+  digest: ""
+
