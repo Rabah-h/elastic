@@ -196,7 +196,7 @@ useIstioLabels: true
 image:
   registry: docker.io
   repository: bitnami/elasticsearch
-  tag: 8.15.1-debian-12-r2
+  tag: 7.17.24-debian-12-r2
   digest: ""
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2538,7 +2538,7 @@ metrics:
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace which Prometheus is running in
     ## e.g:
     ## namespace: monitoring
@@ -2581,7 +2581,7 @@ metrics:
   prometheusRule:
     ## @param metrics.prometheusRule.enabled Creates a Prometheus Operator PrometheusRule (also requires `metrics.enabled` to be `true` and `metrics.prometheusRule.rules`)
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.prometheusRule.namespace Namespace for the PrometheusRule Resource (defaults to the Release Namespace)
     ##
     namespace: ""
@@ -2657,7 +2657,7 @@ volumePermissions:
 sysctlImage:
   ## @param sysctlImage.enabled Enable kernel settings modifier image
   ##
-  enabled: true
+  enabled: false
   ## @param sysctlImage.registry [default: REGISTRY_NAME] Kernel settings modifier image registry
   ## @param sysctlImage.repository [default: REPOSITORY_NAME/os-shell] Kernel settings modifier image repository
   ## @skip sysctlImage.tag Kernel settings modifier image tag
